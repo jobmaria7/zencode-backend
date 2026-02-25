@@ -11,20 +11,22 @@ const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
 const swaggerOptions = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Zencode Candidates API',
-      version: '1.0.0',
-      description: 'API para gerenciamento de candidatos — Teste ZENCODE',
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Zencode Candidates API',
+            version: '1.0.0',
+            description: 'API para gerenciamento de candidatos — Teste ZENCODE',
+        },
+        servers: [
+            {
+                url: process.env.BASE_URL
+                    ? `${process.env.BASE_URL}/api/v1`
+                    : `http://localhost:${process.env.PORT || 8000}/api/v1`,
+            },
+        ],
     },
-    servers: [
-      {
-        url: process.env.BASE_URL || `http://localhost:${process.env.PORT || 8000}/api/v1`,
-      },
-    ],
-  },
-  apis: [path.join(__dirname, '/routes/candidate.routes.js')],
+    apis: [path.join(__dirname, '/routes/candidate.routes.js')],
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
